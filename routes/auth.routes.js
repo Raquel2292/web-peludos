@@ -15,6 +15,36 @@ router.get("/signup", (req, res, next) =>{
 router.post("/signup", (req, res, next) =>{
 
 
+    const { username, email, password } = req.body
+
+    //1. Validaciones de backend
+    // todos los campos deben estar llenos
+    if(username === ""){
+        res.render("auth/signup.hbs", {
+            error: "Debes tener un nombre de Usuario"
+
+        })
+        return;
+        
+    }if(email === ""){
+        res.render("auth/signup.hbs", {
+            error1: "Debes tener un Email"
+        })
+        return;
+    }if(password === ""){
+        res.render("auth/signup.hbs", {
+            error2: "Deber tener un Password"
+        })
+        return;
+    }
+
+    //2. Elementos de seguridad
+
+    //3. Crear perfil
+
+
+
+
 
 
 
