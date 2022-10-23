@@ -38,6 +38,24 @@ router.post("/signup", (req, res, next) =>{
         return;
     }
 
+    // Validación de email
+
+    const emailValidation = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/g
+    if (emailValidation.test(email) === false){
+        res.render("auth/signup.hbs", {
+            error: "Deber colocar un formato valido de correo electronico"
+        })
+    }
+    // Fuerza de contraseña
+
+    const passwordStrong = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/gm
+    if (passwordStrong.test(password) === false){
+        res.render("auth/signup.hbs", {
+            error2: "La contraseña un minimo de 8 caracteres. una letra mayuscula y un número"
+        })
+        return;
+    }
+
     //2. Elementos de seguridad
 
     //3. Crear perfil
