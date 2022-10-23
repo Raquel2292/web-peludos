@@ -1,5 +1,7 @@
 const express = require("express");
 const router = express.Router();
+const bcrypt = require("bcryptjs");
+const User = require("../models/User.model");
 
 // Rutas de autenticación
 
@@ -12,7 +14,7 @@ router.get("/signup", (req, res, next) =>{
 
 //2. POST recibir la información del formulrio
 
-router.post("/signup", (req, res, next) =>{
+router.post("/signup",  (req, res, next) =>{
 
 
     const { username, email, password } = req.body
@@ -59,7 +61,6 @@ router.post("/signup", (req, res, next) =>{
     //2. Elementos de seguridad
 
     //3. Crear perfil
-
 
 
 

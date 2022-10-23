@@ -1,4 +1,4 @@
-const mongoose = requiere("mongoose");
+const mongoose = require("mongoose");
 
 const modelSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
