@@ -121,10 +121,10 @@ router.post ("/login", async (req, res, next) => {
 
 
 
-        req.session.activeUser = foundUser;
+        req.session.activeUser = foundUser; //crea la sesion y la cookie
         
         req.session.save(() => {
-            res.redirect ("/profile/my-profile")
+            res.redirect ("/profile")
         })
     } 
     catch (error) {
@@ -133,10 +133,5 @@ router.post ("/login", async (req, res, next) => {
 
 })
 
-router.get ("/logout", (req, res, next) => {
-    req.session.destroy(() => {
-        res.redirect("/")
-    })
-})
 
 module.exports = router;
