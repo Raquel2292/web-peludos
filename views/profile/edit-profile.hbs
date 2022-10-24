@@ -1,10 +1,11 @@
  <div>
     
-    <h4>Mi perfil</h4>
-
-    
-    <form action="/profile/edit" method="POST">
-
+    <h4>Editar mi perfil</h4>
+     
+    <form action="/profile/{{userDetails._id}}/edit" method="POST">
+    <label for="username">Nombre:</label>
+    <input type="text" name="username">
+    <br>
     <label for="email">Correo Electrónico:</label>
     <input type="text" name="email">
     <br>

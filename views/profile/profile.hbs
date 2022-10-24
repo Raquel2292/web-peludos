@@ -1,0 +1,14 @@
+
+<div>
+
+  <h3>¡HOLA! {{userDetails.username}}</h3>
+  <p>Tu nombre de usuario es: {{userDetails.username}}</p>
+   <p>Tu email es: {{userDetails.email}}</p>
+  <form action="/profile/{{userDetails._id}}/delete" method="POST">
+    <button>Dar de Baja</button>
+  </form>
+
+  <a href="/profile/edit-profile">Editar Usuario</a>
+
+
+</div>
