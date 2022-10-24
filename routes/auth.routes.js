@@ -6,24 +6,24 @@ const User = require("../models/User.model");
 
 // Rutas de autenticación
 
-//1. GET renderizar vista de registro
+// GET renderizar vista de registro
 
 router.get("/signup", (req, res, next) =>{
     res.render("auth/signup.hbs")
 
 })
 
-//2. POST recibir la información del formulrio
+// POST recibir la información del formulrio
 
 router.post("/signup", async (req, res, next) =>{
 
 
     const { username, email, password, password2 } = req.body
 
-    //1. Validaciones de backend
+    // Validaciones de backend
     // todos los campos deben estar llenos
     if(username === "" || email === "" || password === ""){
-        res.render("auth/", {
+        res.render("signup", {
             error: "Todos los campos están completos"
 
         })
@@ -45,7 +45,7 @@ router.post("/signup", async (req, res, next) =>{
             error: "Deber colocar un formato valido de correo electronico"
         })
     }
-    // Fuerza de contraseña
+    // Contraseña
 
     const passwordStrong = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/gm
     if (passwordStrong.test(password) === false){
@@ -64,12 +64,12 @@ router.post("/signup", async (req, res, next) =>{
             })
             return;
         }
-        //2. Elementos de seguridad
+        //Elementos de seguridad
         const salt = await bcrypt.genSalt(12)
         const hashPassword = await bcrypt.hash(password, salt)
 
 
-        //3. Crear perfil
+        // Crear perfil
 
         const newUser = {
             username: username,
@@ -78,7 +78,7 @@ router.post("/signup", async (req, res, next) =>{
         }
 
         await User.create(newUser)
-        res.redirect("/profile/my-profile.hbs")
+        res.redirect("/auth/login")
 
     } catch (error) {
         next(error) 
@@ -86,12 +86,12 @@ router.post("/signup", async (req, res, next) =>{
 })
 
 
-//3. GET renderizar vista de formulario de acceso a la pagina
+// GET renderizar vista de formulario de acceso a la pagina
 router.get("/login", (req, res, next) => {
     res.render("auth/login.hbs")
 
 })
-//4. POST recibe credenciales del usuario y valida
+// POST recibe credenciales del usuario y valida
 router.post ("/login", async (req, res, next) => {
     const {email, password} = req.body
     

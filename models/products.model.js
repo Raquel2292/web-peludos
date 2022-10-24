@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const router = express.Router();
 
 const Schema = new mongoose.Schema({
     name: String,
