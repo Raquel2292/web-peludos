@@ -3,6 +3,7 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 const User = require("../models/User.model");
 
+
 // Rutas de autenticación
 
 //1. GET renderizar vista de registro
@@ -17,28 +18,24 @@ router.get("/signup", (req, res, next) =>{
 router.post("/signup", async (req, res, next) =>{
 
 
-    const { username, email, password } = req.body
+    const { username, email, password, password2 } = req.body
 
     //1. Validaciones de backend
     // todos los campos deben estar llenos
-    if(username === ""){
-        res.render("auth/signup.hbs", {
-            error: "Debes tener un nombre de Usuario"
+    if(username === "" || email === "" || password === ""){
+        res.render("auth/", {
+            error: "Todos los campos están completos"
 
         })
         return;
-        
-    }if(email === ""){
-        res.render("auth/signup.hbs", {
-            error1: "Debes tener un Email"
-        })
-        return;
-    }if(password === ""){
-        res.render("auth/signup.hbs", {
-            error2: "Deber tener un Password"
+    }
+    if (password !== password2){
+        res.render("auth/", {
+            error2: "Las contraseñas no coinciden"
         })
         return;
     }
+    
 
     // Validación de email
 
@@ -68,7 +65,8 @@ router.post("/signup", async (req, res, next) =>{
             return;
         }
         //2. Elementos de seguridad
-
+        const salt = await bcrypt.genSalt(12)
+        const hashPassword = await bcrypt.hash(password, salt)
 
 
         //3. Crear perfil
@@ -76,40 +74,69 @@ router.post("/signup", async (req, res, next) =>{
         const newUser = {
             username: username,
             email: email,
-            password: password
+            password: hashPassword
         }
 
         await User.create(newUser)
+        res.redirect("/profile/my-profile.hbs")
 
-        
-        
     } catch (error) {
-        next(error)
-        
-    }
-
-    
-
-    
-
-
-
-
-
-
-   
-
+        next(error) 
+    } 
 })
 
 
 //3. GET renderizar vista de formulario de acceso a la pagina
-router.get("/login", (req, res, next) =>{
+router.get("/login", (req, res, next) => {
     res.render("auth/login.hbs")
 
 })
 //4. POST recibe credenciales del usuario y valida
+router.post ("/login", async (req, res, next) => {
+    const {email, password} = req.body
+    
+    if(email === "" || password === "") {
+        res.render("auth/login.hbs", {
+            error4: "Rellene todos los campos"
+        })
+        return;
+    }
+
+    try {
+        //Busca el usuario en la BD
+        const foundUser = await User.findOne({email: email})
+        if(foundUser === null) {
+            res.render("auth/singup.hbs", {
+                error5: "Credenciales incorrectas"
+            })
+            return;
+        }
+        const isPasswordCorrect = await bcrypt.compare(password, foundUser.password)
+        if (isPasswordCorrect === false ) {
+            res.render("auth/singup.hbs", {
+                error6: "Credenciales incorrectas"
+            })
+            return;
+        }
 
 
 
+        req.session.activeUser = foundUser;
+        
+        req.session.save(() => {
+            res.redirect ("/profile/my-profile")
+        })
+    } 
+    catch (error) {
+        next(error)
+    }
+
+})
+
+router.get ("/logout", (req, res, next) => {
+    req.session.destroy(() => {
+        res.redirect("/")
+    })
+})
 
 module.exports = router;

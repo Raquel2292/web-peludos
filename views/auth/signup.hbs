@@ -4,18 +4,22 @@
 
     <form action="/auth/signup" method="POST">
 
-<label for="username">Nombre de Usuario</label>
+<label for="username">Nombre de Usuario:</label>
 <input type="text"  name="username">
 <br>
 <p style="color:red">{{error}}</p>
-<label for="email">Email</label>
+<label for="email">Correo Electrónico:</label>
 <input type="email"  name="email">
 <br>
 <p style="color:red">{{error1}}</p>
-<label for="password">Password</label>
+<label for="password1">Contraseña:</label>
 <input type="password"  name="password">
 <br>
 <p style="color:red">{{error2}}</p>
+<label for="password2">Repetir Contraseña:</label>
+<input type="password"  name="password2">
+<br>
+<p style="color:red">{{error3}}</p>
 <button>Registrarme</button>
 
 
