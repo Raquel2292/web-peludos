@@ -14,7 +14,7 @@ router.get("/signup", (req, res, next) =>{
 
 //2. POST recibir la información del formulrio
 
-router.post("/signup",  (req, res, next) =>{
+router.post("/signup", async (req, res, next) =>{
 
 
     const { username, email, password } = req.body
@@ -58,16 +58,46 @@ router.post("/signup",  (req, res, next) =>{
         return;
     }
 
-    //2. Elementos de seguridad
+    try {
 
-    //3. Crear perfil
+        const foundUser = await User.findOne({username:username})
+        if(foundUser !== null){
+            res.render("auth/signup.hbs", {
+                error3: "Este Usuario ya Existe"
+            })
+            return;
+        }
+        //2. Elementos de seguridad
+
+
+
+        //3. Crear perfil
+
+        const newUser = {
+            username: username,
+            email: email,
+            password: password
+        }
+
+        await User.create(newUser)
+
+        
+        
+    } catch (error) {
+        next(error)
+        
+    }
+
+    
+
+    
 
 
 
 
 
 
-    res.redirect("/")
+   
 
 })
 
