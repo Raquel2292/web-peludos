@@ -8,16 +8,8 @@ const isLoggedIn = (req, res, next) => {
     }
 }
 
-const isAdmin = (req, res, next) => {
-    if(req.session.activeUser.role !== "admin") {
-        res.redirec("/auth/login")
-    }
-    else {
-        next()
-    }
-}
+
 
 module.exports = {
     isLoggedIn,
-    isAdmin
 }

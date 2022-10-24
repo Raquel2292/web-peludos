@@ -22,4 +22,5 @@ router.use("/user-admin", userAdminRoutes);
 const productsRoutes = require("./products.routes");
 router.use("/products", productsRoutes);
 
+
 module.exports = router;

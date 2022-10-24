@@ -3,8 +3,7 @@ const router = express.Router();
 const User = require("../models/User.model")
 
 
-const { isLoggedIn, isAdmin } = require ("../middlewares/auth.middlewares.js");
-
+const { isLoggedIn } = require("../middlewares/auth.middlewares.js")
 
 router.get("/", isLoggedIn, (req, res, next) => {
     console.log("El usuario hace la solicitud", req.session.activeUser)
@@ -19,14 +18,7 @@ router.get("/", isLoggedIn, (req, res, next) => {
     })
 })
 
-router.get ("/admin.hbs", isLoggedIn, isAdmin, (req, res, next) => {
-    res.redirect("/profile/my-profile.hbs")
-})
-
-
-
-
-
+//EDITAR PERFIL
 
 
 module.exports = router;

@@ -106,25 +106,23 @@ router.post ("/login", async (req, res, next) => {
         //Busca el usuario en la BD
         const foundUser = await User.findOne({email: email})
         if(foundUser === null) {
-            res.render("auth/singup.hbs", {
+            res.render("auth/signup.hbs", {
                 error5: "Credenciales incorrectas"
             })
             return;
         }
         const isPasswordCorrect = await bcrypt.compare(password, foundUser.password)
         if (isPasswordCorrect === false ) {
-            res.render("auth/singup.hbs", {
+            res.render("auth/signup.hbs", {
                 error6: "Credenciales incorrectas"
             })
             return;
         }
 
-
-
         req.session.activeUser = foundUser; //crea la sesion y la cookie
         
         req.session.save(() => {
-            res.redirect ("/profile")
+            res.redirect ("/")
         })
     } 
     catch (error) {
@@ -132,6 +130,13 @@ router.post ("/login", async (req, res, next) => {
     }
 
 })
+
+router.get("/logout", (req, res, next) => {
+    req.session.destroy(() => {
+      res.redirect("/")
+    })
+  })
+  
 
 
 module.exports = router;
