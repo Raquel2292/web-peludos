@@ -14,7 +14,7 @@ router.get("/", isLoggedIn, (req, res, next) => {
             userDetails: response
         })
     })
-    .catch((error) => {a
+    .catch((error) => {
         next(error)
     })
 })

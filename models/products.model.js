@@ -1,5 +1,7 @@
+const express = require("express")
 const router = express.Router();
-const mongoose = require("mongoose")
+
+const { model, mongoose} = require("mongoose")
 
 const productsSchema = new mongoose.Schema({
     name: String,

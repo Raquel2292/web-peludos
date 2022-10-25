@@ -9,13 +9,18 @@ const isLoggedIn = (req, res, next) => {
 }
 
 const isAdmin = (req, res, next) => {
-    if(req.session.activeUser.role !== "admin") {
-        res.redirect("/")
+    if(req.session.activeUser.admin) { //admin es un booleano que si es true, dice que eres el administrador, sino eres un usuario
+        next(); //si eres el administrador continuas
     }
     else{
-        next()
+        res.redirect("/");//si no te redirige a home. 
     }
 }
+
+//BD de los productos de cada animal
+//llamada mongo 
+//y hacer el CRUD = que el de usuario
+
 
 module.exports = {
     isLoggedIn,
