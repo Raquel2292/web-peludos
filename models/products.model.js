@@ -6,7 +6,8 @@ const { model, mongoose} = require("mongoose")
 const productsSchema = new mongoose.Schema({
     name: String,
     description: String,
-    alimentType: String,
+    productType: String,
+    animal: String,
     comments:[{
         type: mongoose.Schema.Types.ObjectId,
         ref:"Products"

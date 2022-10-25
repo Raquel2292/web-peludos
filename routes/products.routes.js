@@ -5,19 +5,51 @@ const Products = require("../models/products.model");
 
 const { isAdmin } = require("../middlewares/auth.middlewares.js");
 
+router.get("/create-product", (req, res, next) =>{ 
+    res.render("products/create-products.hbs", {})
+})
 
-router.get("/:animal", (req, res, next) =>{ // /:animal => productos de ESE animal en concreto. 
+
+router.post("/create-product", async (req, res, next) =>{
+
+
+    const { name, description, productType, animal } = req.body
+
+    // Validaciones de backend
+    // todos los campos deben estar llenos
+    if(name === "" || description === "" || productType === "" || animal === ""){
+        res.render("create-products", {
+            error: "Todos los campos deben estar completos"
+        })
+        return;
+    }
+
+    try {
+        // Crear un producto
+
+        const newProduct = {
+            name,
+            description,
+            productType,
+            animal
+        }
+
+        await Products.create(newProduct);
+        res.redirect("/products")
+
+    } catch (error) {
+        next(error) 
+    } 
+})
+
+router.get("/:animal/list", (req, res, next) =>{ // /:animal => productos de ESE animal en concreto. 
     const { animal } = req.params;
-    
 
-    res.render("products/products.hbs", {
-        animal: animal
-    })
-    
-    Products.findById(req.session.activeUser._id) 
+    Products.find({animal: animal})
     .then((response) =>{
-        res.render("profile/products.hbs", {
-            products: response
+        res.render("products/products.hbs", {
+            products: response,
+            animal
         })
         
     }) 
