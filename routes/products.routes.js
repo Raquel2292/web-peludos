@@ -6,7 +6,8 @@ const Products = require("../models/products.model");
 const { isAdmin } = require("../middlewares/auth.middlewares.js");
 
 router.get("/create-product", (req, res, next) =>{ 
-    res.render("products/create-products.hbs", {})
+    res.render("products/create-products.hbs")
+    
 })
 
 
