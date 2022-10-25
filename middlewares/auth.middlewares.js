@@ -17,7 +17,7 @@ const isAdmin = (req, res, next) => {
     }
 }
 
-//BD de los productos de cada animal
+//Base de Datos de los productos de cada animal
 //llamada mongo 
 //y hacer el CRUD = que el de usuario
 

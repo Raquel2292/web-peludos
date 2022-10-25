@@ -20,7 +20,7 @@ const userAdminRoutes = require("./user-admin.routes");
 router.use("/user-admin", userAdminRoutes);
 
 const productsRoutes = require("./products.routes");
-router.use("/products", productsRoutes);
+router.use("/products", productsRoutes); //prodcutos del animal
 
 
 module.exports = router;
