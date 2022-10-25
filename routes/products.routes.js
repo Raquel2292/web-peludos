@@ -6,7 +6,9 @@ const Products = require("../models/products.model");
 const { isAdmin } = require("../middlewares/auth.middlewares.js");
 
 router.get("/create-product", (req, res, next) =>{ 
-    res.render("products/create-products.hbs")
+    res.render("products/create-product.hbs", {
+       animals: ["dogs", "cats", "birds", "fishes"]
+    })
     
 })
 
@@ -36,7 +38,7 @@ router.post("/create-product", async (req, res, next) =>{
         }
 
         await Products.create(newProduct);
-        res.redirect("/products")
+        res.redirect("/products/" + animal + "/list")
 
     } catch (error) {
         next(error) 
@@ -52,6 +54,7 @@ router.get("/:animal/list", (req, res, next) =>{ // /:animal => productos de ESE
             products: response,
             animal
         })
+
         
     }) 
     .catch((error) =>{
@@ -59,11 +62,18 @@ router.get("/:animal/list", (req, res, next) =>{ // /:animal => productos de ESE
     })
 })
 
-router.get("/edit-products", isAdmin,  (req, res, next) =>{
-    Products.findById(req.session.activeUser._id)
+router.get("/:productId/edit-product", isAdmin,  (req, res, next) =>{
+    const { productId } = req.params; 
+    Products.findById({_id: productId})
     .then((response) => {
-        res.render ("products/edit-products.hbs", {
-            userDetails: response
+        res.render ("products/edit-product.hbs", {
+           product: response,
+           animals: [
+            "dogs", 
+            "cats", 
+            "birds", 
+            "fishes"
+           ]
         })
     })
     .catch((error) => {
@@ -73,24 +83,41 @@ router.get("/edit-products", isAdmin,  (req, res, next) =>{
 
 })
 
-router.post("/:products/edit", (req, res, next) =>{
-    const { products } = req.params
-    const { name, description, alimentType } = req.body
+router.post("/:productId/edit", (req, res, next) =>{
+    const { productId } = req.params
+    const { name, description, productType, animal } = req.body
 
     const productsToEdit ={
         name,
         description,
-        alimentType
+        productType,
+        animal
     }
 
-    Products.findByIdAndUpdate(products, productsToEdit)
+    Products.findByIdAndUpdate(productId, productsToEdit)
     .then(() =>{
-        res.redirect("/products")
+        res.redirect("/products/" + animal + "/list")
     })
     .catch((error) =>{
         next(error)
     })
 })
+
+// Borrar producto
+router.post("/:productId/delete", (req, res, next) => {
+
+    // 1. buscar por su id y borrarlo
+    Products.findByIdAndDelete(req.params.productId)
+    .then((deletedProduct) => {
+      // 2. redireccionar a
+      res.redirect("/products/" + deletedProduct.animal + "/list")
+    })
+    .catch((error) => {
+      next(error)
+    })
+  
+  })
+
 
 
 

@@ -1,8 +1,17 @@
 <h1>Productos de {{animal}}</h1>
 
-<p>hacer el listado de los productos aquí con un EACH</p>
-
-
 <a href="/products/create-product">Crear producto</a>
 
-
+{{#each products}}
+  <div>
+    <a href="/products/{{this._id}}/edit-product">Editar Producto</a>
+    <form action="/products/{{this._id}}/delete" method="POST">
+      <button>Eliminar Producto</button>
+    </form>
+    <p>Nombre: {{this.name}}</p>
+    <p>Descripción: {{this.description}}</p>
+    <p>Tipo de producto: {{this.productType}}</p>
+    <p>Animal: {{this.animal}}</p>
+  </div>
+  <hr />
+{{/each}}

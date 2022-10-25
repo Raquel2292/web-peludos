@@ -1,0 +1,30 @@
+<div>
+
+  <h3>Crea tu Producto</h3>
+
+  <form action="/products/create-product" method="POST">
+
+    <label for="name">Nombre:</label>
+    <input type="text" name="name" />
+    <br />
+    <label for="description">Descripción:</label>
+    <input type="text" name="description" />
+    <br />
+    <label for="productType">Tipo de Producto:</label>
+    <input type="text" name="productType" />
+    <br />
+    <label for="animal">Animal:</label>
+    <select name="animal">
+      <option value="">Elige un animal</option>
+
+      {{#each animals}}
+
+        <option value="{{this}}">{{this}}</option>
+
+      {{/each}}
+
+    </select>
+    <br/>
+    <button>Crear Producto</button>
+  </form>
+</div>
