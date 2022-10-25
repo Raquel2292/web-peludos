@@ -3,17 +3,18 @@ const router = express.Router();
 const Products = require("../models/products.model")
 
 
-const { isAdmin } = require("../middlewares/auth.middlewares.js")
+const { isAdmin } = require("../middlewares/auth.middlewares.js");
 
 
 router.get("/:animal", (req, res, next) =>{
     const { animal } = req.params;
+    
 
     res.render("products/products.hbs", {
         animal: animal
     })
-
-    /*Products.findById(req.session.activeUser._id) //en vez de por un id que busque por una propiedad (propiedad de perro, de gato...)
+    
+    Products.findById(req.session.activeUser._id) 
     .then((response) =>{
         res.render("profile/products.hbs", {
             products: response
@@ -22,13 +23,13 @@ router.get("/:animal", (req, res, next) =>{
     }) 
     .catch((error) =>{
         next(error)
-    })*/
+    })
 })
 
 router.get("/edit-products", isAdmin,  (req, res, next) =>{
-    User.findById(req.session.activeUser._id)
+    Products.findById(req.session.activeUser._id)
     .then((response) => {
-        res.render ("profile/edit-products.hbs", {
+        res.render ("products/edit-products.hbs", {
             userDetails: response
         })
     })
@@ -38,5 +39,26 @@ router.get("/edit-products", isAdmin,  (req, res, next) =>{
 
 
 })
+
+router.post("/:products/edit", (req, res, next) =>{
+    const { products } = req.params
+    const { name, description, alimentType } = req.body
+
+    const productsToEdit ={
+        name,
+        description,
+        alimentType
+    }
+
+    Products.findByIdAndUpdate(products, productsToEdit)
+    .then(() =>{
+        res.redirect("/products")
+    })
+    .catch((error) =>{
+        next(error)
+    })
+})
+
+
 
 module.exports = router;
