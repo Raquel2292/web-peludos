@@ -14,7 +14,7 @@ router.get("/", isLoggedIn, (req, res, next) => {
             userDetails: response
         })
     })
-    .catch((error) => {
+    .catch((error) => {a
         next(error)
     })
 })
@@ -35,7 +35,7 @@ router.get("/edit-profile", (req, res, next) => {
 // POST recibe el usuario a editar en mongo
 router.post("/:userId/edit", (req, res, next) => {
 
-    // recibir la data a a editar
+    // recibir la data a editar
     const { userId } = req.params
     const { username, email, password } = req.body
   
@@ -71,6 +71,20 @@ router.post("/:userId/delete", (req, res, next) => {
       next(error)
     })
   
+  })
+
+  // Actualizar
+  router.get("/:userId/edit", (req, res, next) => {
+    const {userId} = req.params
+    User.findById(userId)
+    .then((response) => {
+      res.render("profile/edit", {
+        userDetails: response
+      })
+    })
+    .catch((error) => {
+      next(error)
+    })
   })
 
 
