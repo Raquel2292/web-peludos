@@ -1,4 +1,4 @@
-const router = express.Router();
+
 const mongoose = require("mongoose")
 
 const productsSchema = new mongoose.Schema({
@@ -16,6 +16,6 @@ const productsSchema = new mongoose.Schema({
     }]
 })
 
-const Products = model("Products", productsSchema);
+const Products = mongoose.model ("Products", productsSchema);
 
 module.exports = Products;
