@@ -1,6 +1,6 @@
 const express = require("express");
-const router = express.Router();
 const Products = require("../models/products.model");
+const router = express.Router();
 const uploader = require("../middlewares/cloudinary.js");
 const { isAdmin } = require("../middlewares/auth.middlewares.js");
 
@@ -117,7 +117,26 @@ router.post("/:productId/delete", (req, res, next) => {
   
   })
 
+  
+ 
 
 
+/*router.get("/", (req, res, next) =>{
+    Products.findById()
+    .then((response) =>{
+        res.render("profile/products.hbs", {
+            productsDetails: response
+        })
+       
+    })
+    .catch((error) =>{
+        next(error)
+    })
+    
+
+})
+
+
+router.post()*/
 
 module.exports = router;

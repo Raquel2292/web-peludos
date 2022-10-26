@@ -12,7 +12,12 @@
     <p>Descripción: {{this.description}}</p>
     <p>Tipo de producto: {{this.productType}}</p>
     <p>Animal: {{this.animal}}</p>
+    <img src="{{this.cover}}" alt="imagen">
 {{/each}}    
-    <img src="{{products.cover}}" alt="imagen">
+
+    <form action="/products/details-products" method="POST">
+     <button type="submit">Deja tu Comentario</button>
+
+    </form>
   </div>
   <hr />

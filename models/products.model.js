@@ -15,6 +15,6 @@ const productsSchema = new mongoose.Schema({
    cover: String, //imagen cloudinary
 })
 
-const Products = model("Products", productsSchema);
+const Products = mongoose.model ("Products", productsSchema);
 
 module.exports = Products;
