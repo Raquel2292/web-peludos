@@ -117,26 +117,22 @@ router.post("/:productId/delete", (req, res, next) => {
   
   })
 
-  
+
+router.get("/products/:productId/comments", (req, res, next) => {
+    const { productId } = req.params
+    res.render("/products/comments.hbs", {
+        productId
+        })
+})
  
 
-
-/*router.get("/", (req, res, next) =>{
-    Products.findById()
-    .then((response) =>{
-        res.render("profile/products.hbs", {
-            productsDetails: response
-        })
-       
-    })
-    .catch((error) =>{
-        next(error)
-    })
-    
-
+router.post("/products/:productId/comments", (req, res, next) => {
+  Products.findById(req.params.productId)
+  .then((commentsProduct) => {
+    res.redirect("products/:animal/list")
+  })
 })
 
 
-router.post()*/
 
 module.exports = router;

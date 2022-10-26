@@ -8,10 +8,7 @@ const productsSchema = new mongoose.Schema({
     description: String,
     productType: String,
     animal: String,
-    comments:[{
-        type: mongoose.Schema.Types.ObjectId,
-        ref:"Products"
-   }],
+    comments:[String],
    cover: String, //imagen cloudinary
 })
 
