@@ -8,9 +8,20 @@ const userSchema = new Schema(
       trim: true,
       required: false,
       unique: true,
+      
      
       
     },
+
+    favorites:[
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Products"
+
+      }
+    ],
+      
+   
 
     role:{
       type: String,
