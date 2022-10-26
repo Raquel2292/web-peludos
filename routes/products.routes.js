@@ -1,4 +1,5 @@
 const express = require("express");
+const Products = require("../models/products.model");
 const router = express.Router();
 const Products = require("../models/products.model");
 
@@ -122,5 +123,25 @@ router.post("/:productId/delete", (req, res, next) => {
  
 
 
+<<<<<<< HEAD
+=======
+router.get("/", (req, res, next) =>{
+    Products.findById()
+    .then((response) =>{
+        res.render("profile/products.hbs", {
+            productsDetails: response
+        })
+       
+    })
+    .catch((error) =>{
+        next(error)
+    })
+    
+
+})
+
+
+router.post()
+>>>>>>> 06846b395a99fd0725fe5a5519dcca3b47ec4ebb
 
 module.exports = router;
