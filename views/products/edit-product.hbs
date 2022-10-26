@@ -15,12 +15,11 @@
     <input type="text" name="productType" value="{{product.productType}}"/> 
     <br/>
     <label for="animal">Animal:</label>
-    <select name="animal">
-      <option value="">Elige un animal</option>
+    <select name="animal"> {{!--value: --}}
 
       {{#each animals}}
 
-        <option value="{{this}}">{{this}}</option>
+        <option value="{{this}}" selected="selected">{{this}}</option> {{!--select: --}}
 
       {{/each}}
 
