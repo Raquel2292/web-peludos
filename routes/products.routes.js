@@ -65,7 +65,7 @@ router.get("/:animal/list", (req, res, next) =>{ // /:animal => productos de ESE
 
 router.get("/:productId/edit-product", isAdmin,  (req, res, next) =>{
     const { productId } = req.params; 
-    Products.findById({_id: productId})
+    Products.findById(productId)
     .then((response) => {
         res.render ("products/edit-product.hbs", {
            product: response,

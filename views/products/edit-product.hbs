@@ -2,7 +2,6 @@
 
   <h3>Edita tus Productos</h3>
 
-  
   <form action="/products/{{product._id}}/edit" method="POST">
 
     <label for="name">Nombre:</label>
@@ -12,14 +11,18 @@
     <input type="text" name="description" value="{{product.description}}" />
     <br />
     <label for="productType">Tipo de Producto:</label>
-    <input type="text" name="productType" value="{{product.productType}}"/> 
-    <br/>
+    <input type="text" name="productType" value="{{product.productType}}" />
+    <br />
     <label for="animal">Animal:</label>
-    <select name="animal"> {{!--value: --}}
+    <select name="animal" value="{{product.animal}}">
 
-      {{#each animals}}
+    <option value="{{product.animal}}">{{product.animal}}</option> 
+ 
 
-        <option value="{{this}}" selected="selected">{{this}}</option> {{!--select: --}}
+        {{#each animals}}
+
+
+        <option value="{{this}}">{{this}}</option> 
 
       {{/each}}
 
