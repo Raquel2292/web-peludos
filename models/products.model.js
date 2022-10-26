@@ -11,7 +11,8 @@ const productsSchema = new mongoose.Schema({
     comments:[{
         type: mongoose.Schema.Types.ObjectId,
         ref:"Products"
-   }] 
+   }],
+   cover: String, //imagen cloudinary
 })
 
 const Products = model("Products", productsSchema);

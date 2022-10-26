@@ -1,27 +1,25 @@
 const express = require("express");
 const router = express.Router();
 const Products = require("../models/products.model");
-
-
+const uploader = require("../middlewares/cloudinary.js");
 const { isAdmin } = require("../middlewares/auth.middlewares.js");
 
 router.get("/create-product", (req, res, next) =>{ 
     res.render("products/create-product.hbs", {
-       animals: ["dogs", "cats", "birds", "fishes"]
+       animals: ["dogs", "cats", "birds", "fishes", "cover"]
     })
     
 })
 
-
-router.post("/create-product", async (req, res, next) =>{
-
-
+//ante de llegar a la funcion de la ruta, pasa por cloudinary
+router.post("/create-product", uploader.single("cover"), async (req, res, next) =>{
+    console.log(req.file.path) //=> esto viene de cloudinary y es el URL de acceso a la imagen 
     const { name, description, productType, animal } = req.body
 
     // Validaciones de backend
-    // todos los campos deben estar llenos
+    //. todos los campos deben estar llenos
     if(name === "" || description === "" || productType === "" || animal === ""){
-        res.render("create-products", {
+        res.render("create-products.hbs", {
             error: "Todos los campos deben estar completos"
         })
         return;
@@ -34,11 +32,12 @@ router.post("/create-product", async (req, res, next) =>{
             name,
             description,
             productType,
-            animal
+            animal,
+            cover: req.file.path
         }
-
-        await Products.create(newProduct);
+        let newProduct1 =  await Products.create(newProduct);
         res.redirect("/products/" + animal + "/list")
+     console.log(newProduct1)
 
     } catch (error) {
         next(error) 

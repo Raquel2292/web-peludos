@@ -2,8 +2,8 @@
 
   <h3>Crea tu Producto</h3>
 
-  <form action="/products/create-product" method="POST">
-
+  <form action="/products/create-product" method="POST" enctype="multipart/form-data">
+    
     <label for="name">Nombre:</label>
     <input type="text" name="name" />
     <br />
@@ -14,7 +14,7 @@
     <input type="text" name="productType" />
     <br />
     <label for="animal">Animal:</label>
-    <select name="animal"> 
+    <select name="animal">
       <option value="">Elige un animal</option>
 
       {{#each animals}}
@@ -24,7 +24,11 @@
       {{/each}}
 
     </select>
-    <br/>
+   
+      <label for="cover">Imagen Producto</label>
+      <input type="file" name="cover">
+    
+    <br />
     <button>Crear Producto</button>
   </form>
 </div>

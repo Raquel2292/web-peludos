@@ -14,16 +14,16 @@ cloudinary.config({
 })
 
 //crea las configuraciones del bundle
-const storage = CloudinaryStorage({
+const storage = new CloudinaryStorage({
     cloudinary,
-    params: {
+    params: {   //elementos específicos que queremos que dejamos que se permiten 
         allowedFormats: ["jpg", "png"],
         folder: "web-peludos"
     }
 })
 
-const uploader = multer({
-    storage
+const uploader = multer({  //sune las imagenes
+    storage  //es lo que acabamos de crear arriba
 })
 
 module.exports = uploader
