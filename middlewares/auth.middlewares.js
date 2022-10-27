@@ -9,7 +9,7 @@ const isLoggedIn = (req, res, next) => {
 }
 
 const isAdmin = (req, res, next) => {
-    if(req.session.activeUser.admin) { //admin es un booleano que si es true, dice que eres el administrador, sino eres un usuario
+    if(req.session.activeUser.role === "admin") { //admin es un booleano que si es true, dice que eres el administrador, sino eres un usuario
         next(); //si eres el administrador continuas
     }
     else{
@@ -17,9 +17,6 @@ const isAdmin = (req, res, next) => {
     }
 }
 
-//Base de Datos de los productos de cada animal
-//llamada mongo 
-//y hacer el CRUD = que el de usuario
 
 
 module.exports = {

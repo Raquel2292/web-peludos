@@ -1,40 +1,69 @@
-<!DOCTYPE html>
 <html lang="en">
 
-   <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta http-equiv="X-UA-Compatible" content="ie=edge">
-      <title>{{Peludos}}</title>
-      <link rel="stylesheet" href="/stylesheets/style.css" />
-    
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>{{Peludos}}</title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <!-- CSS only -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+      crossorigin="anonymous"
+    />
 
-   </head>
+  </head>
 
-   <body>
-      <h1>Peludos</h1>
-      <nav>
+  <body>
+    <nav class="navbar navbar-expand-lg" style="background-color: #06f2e2">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">PELUDOS</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/">Home</a>
+            </li>
+            {{#if isUserActive}}
+              <li class="nav-item">
+                <a
+                  class="nav-link active"
+                  aria-current="page"
+                  href="/profile"
+                >Mi Perfil</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="/auth/logout">Cerrar Sesión</a>
+              </li>
+            {{else}}
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="/auth/signup">Registrar</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link"  aria-current="page" href="/auth/login">Acceder</a>
+              </li>
+            {{/if}}
+          </ul>
+        </div>
+      </div>
+    </nav>
 
-         <a href="/">Home</a>
+    {{{body}}}
 
-         {{#if isUserActive}}
-         <a href="/profile">Mi Perfil</a>
-         <a href="/auth/logout">Cerrar Sesión</a>
-         {{else}}
-         <a href="/auth/signup">Registrar</a>
-         <a href="/auth/login">Acceder</a>
-         {{/if}}
-         
-         
-        {{!-- <a href="/auth/logout">Cerrar Sesión</a>
-         <a href="/profile">Mi Perfil</a>
-         <a href="/productos">Productos</a> --}}
-      </nav>
+    <script src="/js/script.js"></script>
 
-      {{{body}}}
-
-      <script src="/js/script.js"></script>
-      
-   </body>
+  </body>
 
 </html>

@@ -11,10 +11,7 @@ router.get("/create-product", (req, res, next) => {
 });
 
 //ante de llegar a la funcion de la ruta, pasa por cloudinary
-router.post(
-  "/create-product",
-  uploader.single("cover"),
-  async (req, res, next) => {
+router.post("/create-product", uploader.single("cover"),async (req, res, next) => {
     console.log(req.file.path); //=> esto viene de cloudinary y es el URL de acceso a la imagen
     const { name, description, productType, animal } = req.body;
 
@@ -104,18 +101,7 @@ router.post("/:productId/edit", (req, res, next) => {
     });
 });
 
-// Borrar producto
-router.post("/:productId/delete", (req, res, next) => {
-  // 1. buscar por su id y borrarlo
-  Products.findByIdAndDelete(req.params.productId)
-    .then((deletedProduct) => {
-      // 2. redireccionar a
-      res.redirect("/products/" + deletedProduct.animal + "/list");
-    })
-    .catch((error) => {
-      next(error);
-    });
-});
+
 
 //Rutas de comentarios
 
@@ -134,6 +120,19 @@ router.post("/:productId/comments", (req, res, next) => {
       res.redirect("/products/" + response.animal + "/list");
     });
   });
+});
+
+// Borrar producto
+router.post("/:productId/delete", (req, res, next) => {
+  // 1. buscar por su id y borrarlo
+  Products.findByIdAndDelete(req.params.productId)
+    .then((deletedProduct) => {
+      // 2. redireccionar a
+      res.redirect("/products/" + deletedProduct.animal + "/list");
+    })
+    .catch((error) => {
+      next(error);
+    });
 });
 
 module.exports = router;
