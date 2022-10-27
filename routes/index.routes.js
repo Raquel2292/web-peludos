@@ -13,9 +13,6 @@ router.use("/auth", authRoutes);
 const profileRoutes = require("./profile.routes");
 router.use("/profile", profileRoutes);
 
-const commentsRoutes = require("./comments.routes");
-router.use("/comments", commentsRoutes);
-
 const userAdminRoutes = require("./user-admin.routes");
 router.use("/user-admin", userAdminRoutes);
 

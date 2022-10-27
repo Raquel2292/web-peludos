@@ -12,12 +12,11 @@
     <p>Descripción: {{this.description}}</p>
     <p>Tipo de producto: {{this.productType}}</p>
     <p>Animal: {{this.animal}}</p>
+    <a href="/products/{{this._id}}/comments">Deja un comentario</a>
     <img src="{{this.cover}}" alt="imagen">
 {{/each}}    
 
-    <form action="/products/details-products" method="POST">
-     <button type="submit">Deja tu Comentario</button>
-
-    </form>
+  
+  
   </div>
   <hr />
