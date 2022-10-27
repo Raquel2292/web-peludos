@@ -7,8 +7,7 @@ Description
 Peludos es una web donde encontraras los mejores productos para tu mascota y los más valorados, también podrás subir tus productos favoritos.
 
 User Stories
-404 - 
-500 - 
+
 homepage - 
 sign up - 
 login - 
@@ -24,17 +23,12 @@ User profile:
 
 see my profile
 upload my profile picture
-see other users profile
-list of events created by the user
-list events the user is attending
-Geo Location:
+list of products created by the user
+delete information.
+upload files.
 
-add geolocation to events when creating
-show event in a map in event detail page
-show all events in a map in the event list page
-Homepage
 
-...
+
 ROUTES:
 GET /
 

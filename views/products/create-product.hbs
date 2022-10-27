@@ -5,16 +5,16 @@
   <form action="/products/create-product" method="POST" enctype="multipart/form-data">
     
     <label for="name">Nombre:</label>
-    <input type="text" name="name" />
+    <input type="text" class="border border-info" name="name" />
     <br />
     <label for="description">Descripción:</label>
-    <textarea name="description"></textarea>
+    <textarea name="description" class="border border-info"></textarea>
     <br />
     <label for="productType">Tipo de Producto:</label>
-    <input type="text" name="productType" />
+    <input type="text" class="border border-info" name="productType" />
     <br />
     <label for="animal">Animal:</label>
-    <select name="animal">
+    <select class="border border-info" name="animal">
       <option value="">Elige un animal</option>
 
       {{#each animals}}
@@ -26,9 +26,9 @@
     </select>
    
       <label for="cover">Imagen Producto</label>
-      <input type="file" name="cover">
+      <input type="file" class="btn btn-info" class="border border-info" name="cover">
     
     <br />
-    <button>Crear Producto</button>
+    <button class="btn btn-info">Crear Producto</button>
   </form>
 </div>
