@@ -9,3 +9,27 @@ body {
   font-weight: bold;
   font-family: "fangsong";
 }
+
+.home {
+  text-align: center;
+  font-family: sans-serif; 
+  font-size: 18px; 
+  font-weight: 400;
+  padding: 40px;
+}
+
+.products {
+  text-align: center;
+  font-family: sans-serif; 
+  font-size: 18px; 
+  font-weight: 400;
+  padding: 40px;
+}
+
+.button-create {
+  text-align: center;
+  font-family: sans-serif; 
+  font-size: 18px; 
+  font-weight: 400;
+  padding: 40px;
+}
