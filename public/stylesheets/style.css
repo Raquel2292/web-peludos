@@ -1,18 +1,11 @@
 body {
-  padding: 50px;
+  padding: 0px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: #ECEFF1 !important;
 }
 
-a {
-  color: #00b7ff;
+.navbar-brand {
+  color: #13c1ac !important;
+  font-weight: bold;
+  font-family: "fangsong";
 }
-
-h1 {
-  color: 15px;
-}
-
-.products-list {
-  display:flex;
-  justify-content: space-around;
-}
-
