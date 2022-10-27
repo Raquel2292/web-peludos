@@ -10,3 +10,9 @@ a {
 h1 {
   color: 15px;
 }
+
+.products-list {
+  display:flex;
+  justify-content: space-around;
+}
+
