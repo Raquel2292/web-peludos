@@ -51,6 +51,7 @@ router.post(
   }
 );
 
+
 router.get("/:animal/list", (req, res, next) => {
   // /:animal => productos de ESE animal en concreto.
   const { animal } = req.params;
@@ -67,7 +68,9 @@ router.get("/:animal/list", (req, res, next) => {
     });
 });
 
-router.get("/:productId/edit-product", isAdmin, (req, res, next) => {
+
+//RUTA PARA EDITAR
+router.get("/:productId/edit", isAdmin, (req, res, next) => {
   const { productId } = req.params;
   Products.findById(productId)
     .then((response) => {
@@ -113,6 +116,8 @@ router.post("/:productId/delete", (req, res, next) => {
       next(error);
     });
 });
+
+//Rutas de comentarios
 
 router.get("/:productId/comments", (req, res, next) => {
   const { productId } = req.params;
