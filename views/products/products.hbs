@@ -1,22 +1,20 @@
 <h1>Productos de {{animal}}</h1>
 
-<a href="/products/create-product">Crear producto</a>
-
+<a class="btn btn-success" href="/products/create-product" >Crear producto</a>
+<div class="list-container">
 {{#each products}}
-  <div>
-    <a href="/products/{{this._id}}/edit">Editar Producto</a>
-    <form action="/products/{{this._id}}/delete" method="POST">
-      <button>Eliminar Producto</button>
-    </form>
-    <p>Nombre: {{this.name}}</p>
-    <p>Descripción: {{this.description}}</p>
-    <p>Tipo de producto: {{this.productType}}</p>
-    <p>Animal: {{this.animal}}</p>
-    <a href="/products/{{this._id}}/comments">Deja un comentario</a>
-    <img src="{{this.cover}}" alt="imagen">
-{{/each}}    
+<div class="products-list">
+<div class="card" style="width: 16em">
+  <img src="{{this.cover}}" class="card-img-top" alt="{{this.name}}">
+  <div class="card-body">
+    <h5 class="card-title">{{this.name}}</h5>
+    <p class="card-text">{{this.description}}</p>
+    <a class="btn btn-primary" href="/products/{{this._id}}/comments">Deja un comentario</a>
+    <a class="btn btn-warning" href="/products/{{this._id}}/edit">Editar Producto</a>
+    <form  action="/products/{{this._id}}/delete" method="POST">
+     <button class="btn btn-danger">Eliminar Producto</button>
+</div>
+</div>
+{{/each}}  
 
-  
-  
-  </div>
-  <hr />
+
