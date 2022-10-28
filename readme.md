@@ -1,92 +1,163 @@
-Project
+# Peludos
+## La  web para tu mascosta
 
-#Peludos
 
-Description
 
+## Descripción
 Peludos es una web donde encontraras los mejores productos para tu mascota y los más valorados, también podrás subir tus productos favoritos.
 
-User Stories
 
-homepage - 
-sign up - 
-login - 
-logout - 
-events list - 
-events create - 
-events detail - 
-event attend - 
-Backlog
-List of other features outside of the MVPs scope
+## Histroias de Usuarios.
 
-User profile:
+homepage: como usuario, quiero ver una vista previa de productos y poder buscar un el producto para mi mascota o ir a mi perfil desde la página de inicio.
 
-see my profile
-upload my profile picture
-list of products created by the user
-delete information.
-upload files.
+sign up: Como usuario, quiero ver una página de bienvenida que me brinde la opción de iniciar sesión como usuario existente o registrarme con una nueva cuenta.
 
+login: Como usuario, quiero ver una página de bienvenida que me brinde la opción de iniciar sesión como usuario existente.
 
+logout - Como usuario, quiero ver una página  que me brinde la opción de cerrar sesión como usuario existente.
 
-ROUTES:
-GET /
+product-create-form - Como usuario, quiero poder  crear mi producto y poder subirlo a la web.
 
-renders the homepage
-GET /auth/signup
+user-profile - Como usuario quiero comprobar la información de mi perfil y poder editarla.
 
-redirects to / if user logged in
-renders the signup form (with flash msg)
-POST /auth/signup
+## Rutas Backend
 
-redirects to / if user logged in
-body:
-username
-email
-password
-GET /auth/login
+-GET/
+auth/signup
+auth/signup.hbs
 
-redirects to / if user logged in
-renders the login form (with flash msg)
-POST /auth/login
+-GET 
+auth/login
+auth/login.hb
 
-redirects to / if user logged in
-body:
-username
-password
-POST /auth/logout
+-GET
+auth/logout
+redirec "/"
 
-body: (empty)
-GET /events
+-GET
+"/"
+render "index"
 
-renders the event list + the create form
-POST /events/create
+-GET
+/create-product
+render products/create-product.hbs
 
-redirects to / if user is anonymous
-body:
-name
-date
-location
-description
-GET /events/:id
+-GET
+/:animal/list
+render "products/products.hbs
 
-renders the event detail page
-includes the list of attendees
-attend button if user not attending yet
-POST /events/:id/attend
+-GET
+/:productId/edit
+render products/edit-product.hbs
 
-redirects to / if user is anonymous
-body: (empty - the user is already stored in the session)
-Models
-User model
+-GET
+/:productId/comments
+render products/comments.hb
 
-username: String
-password: String
-Event model
+-GET
+"/
+render profile/profile.hbs
 
-owner: ObjectId<User>
-name: String
-description: String
-date: Date
-location: String
-attendees: [ObjectId<User>]
+-GET
+edit-profile
+render profile/edit-profile.hbs
+
+-GET
+/:userId/edit
+render profile/edit
+
+-GET
+"/"
+render "auth/login.hbs
+
+##POST
+
+-POST
+/signup
+render auth/signup.hbs
+
+-POST
+/:productId/edit
+redirect /products/" + animal + "/list"
+
+-POST
+/:productId/comments
+redirect /products/
+
+-POST
+/:productId/delete
+redirect /products/
+
+-POST
+/:userId/edit
+redirect /profile
+
+-POST
+/:userId/delete
+redirect "/"
+
+## MODELOS
+
+-productsSchema = new mongoose.Schema({
+    name: String,
+    description: String,
+    productType: String,
+    animal: String,
+    comments:[String],
+   cover: String, //imagen cloudinary
+})
+
+-userSchema = new Schema(
+  {
+    username: {
+      type: String,
+      trim: true,
+      required: false,
+      unique: true,
+      
+     
+      
+    },
+ favorites:[
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Products"
+
+      }
+    ],
+      
+   
+
+    role:{
+      type: String,
+      enum: ["admin", "user"],
+      default: "user"
+    },
+
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+      lowercase: true,
+      trim: true
+    },
+
+    password: {
+      type: String,
+      required: true
+    },
+    photo: String,
+    comments: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref:"Products"
+    }]
+    
+    ## BACKLOG
+
+-FAVORITOS
+-RESTRINGIR PERMISOS AL QUE NO ESTA LOGADO.
+
+## LINKS
+
+https://github.com/Raquel2292/web-peludos.git

@@ -22,7 +22,7 @@ const storage = new CloudinaryStorage({
     }
 })
 
-const uploader = multer({  //sune las imagenes
+const uploader = multer({  //sube las imagenes
     storage  //es lo que acabamos de crear arriba
 })
 
