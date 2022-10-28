@@ -9,6 +9,7 @@ const isLoggedIn = (req, res, next) => {
 }
 
 const isAdmin = (req, res, next) => {
+    console.log(req.session.activeUser.role)
     if(req.session.activeUser.role === "admin") { //admin es un booleano que si es true, dice que eres el administrador, sino eres un usuario
         next(); //si eres el administrador continuas
     }

@@ -33,3 +33,8 @@ body {
   font-weight: 400;
   padding: 40px;
 }
+
+.detailImg {
+  width: 200px;
+  margin: 0 auto;
+}
