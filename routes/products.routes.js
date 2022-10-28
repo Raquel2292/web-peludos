@@ -114,9 +114,10 @@ router.get("/:productId/comments", (req, res, next) => {
 
 router.post("/:productId/comments", (req, res, next) => {
     const { comments } = req.body;
-  Products.findById(req.params.productId).then((response) => {
+    const { productId } = req.params;
+  Products.findById(productId).then((response) => {
     response.comments.push(comments);
-    Products.findByIdAndUpdate(req.params.productId, response).then(() => {
+    Products.findByIdAndUpdate(productId, response).then(() => {
       res.redirect("/products/" + response.animal + "/list");
     });
   });
@@ -133,6 +134,16 @@ router.post("/:productId/delete", (req, res, next) => {
     .catch((error) => {
       next(error);
     });
+});
+
+router.get("/:productId/detail", (req, res, next) => {
+  const { productId } = req.params;
+  Products.findById(productId)
+    .then((response) => {
+    res.render("products/detail.hbs", {
+    product: response
+  });
+});
 });
 
 module.exports = router;
